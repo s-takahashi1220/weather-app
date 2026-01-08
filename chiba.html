@@ -1,13 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>お天気アプリ</title>
 </head>
+
 <body>
     <h1>お天気アプリ</h1>
     <div id="weather-info">---</div>
     <p>気温： <span id="temperature">--</span>℃</p>
+    <p>湿度： <span id="humidity">--</span>%</p>
+    <p>天気： <span id="weather-info">--</span></p>
+    <script>
+        const tempElement = document.getElementById('temperature'); // 気温用の箱
+        const humElement = document.getElementById('humidity'); // 湿度用の箱
+        const weatherInfoElement = document.getElementById('weather-info'); // 天気情報用の箱
+
+        async function updateWeather() {
+            const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.6&longitude=140.1167&hourly=temperature_2m,weather_code,relative_humidity_2m';
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                console.log(data);
+
+                tempElement.textContent = data.current.temperature_2m;
+                humElement.textContent = data.current.relative_humidity_2m;
+                weatherInfoElement.textContent = data.current.weather_code;
+            } catch (error) {
+                console.error('天気情報の取得に失敗しました', error);
+            }
+        }
+        updateWeather();
+    </script>
 </body>
+
 </html>
