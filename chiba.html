@@ -8,21 +8,20 @@
 </head>
 
 <body>
-    <h1>お天気アプリ</h1>
+    <h1>現在の千葉県の天気</h1>
     <div id="weather-info">---</div>
     <p>気温： <span id="temperature">--</span>℃</p>
     <p>湿度： <span id="humidity">--</span>%</p>
-    <p>天気： <span id="weatherInfo">--</span></p>
     <script>
         const tempElement = document.getElementById('temperature'); // 気温用の箱
         const humElement = document.getElementById('humidity'); // 湿度用の箱
         const weatherInfoElement = document.getElementById('weather-info'); // 天気情報用の箱
 
         async function updateWeather() {
-            const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.6&longitude=140.1167&hourly=temperature_2m,weather_code,relative_humidity_2m';
+            const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.6&longitude=140.1167&current=temperature_2m,weather_code,relative_humidity_2m';
 
             try {
-                const response = await fetch(url);
+                const response = await fetch(url); // URLへデータを取りに行く
                 const data = await response.json();
                 console.log(data);
 
