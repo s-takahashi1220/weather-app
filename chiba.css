@@ -18,7 +18,7 @@ h1 {
     font-size: 1.3rem;
 }
 
-/* 天気コード（数字） */
+/* 天気（今は数字） */
 #weather-info {
     font-size: 3rem;
     margin: 20px 0;
