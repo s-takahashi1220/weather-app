@@ -1,0 +1,31 @@
+/* ページ全体の設定 */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+    text-align: center;
+    color: #333;
+    background-color: #e0f7fa;
+}
+
+/* タイトル */
+h1 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+/* 天気コード（数字） */
+#weather-info {
+    font-size: 3rem;
+    margin: 20px 0;
+}
+
+/* 気温と湿度 */
+p {
+    font-size: 1.2rem;
+    margin: 5px 0;
+}
