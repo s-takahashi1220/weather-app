@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>お天気アプリ</title>
+    <link rel="stylesheet" href="chiba.css">
 </head>
 
 <body>
@@ -24,7 +25,7 @@
                 const response = await fetch(url); // URLへデータを取りに行く
                 const data = await response.json();
                 console.log(data);
-
+                // 取得したデータを反映
                 tempElement.textContent = data.current.temperature_2m;
                 humElement.textContent = data.current.relative_humidity_2m;
                 weatherInfoElement.textContent = data.current.weather_code;
