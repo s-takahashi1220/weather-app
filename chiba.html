@@ -22,6 +22,21 @@
         const humElement = document.getElementById('humidity'); // 湿度用の箱
         const weatherInfoElement = document.getElementById('weather-info'); // 天気情報用の箱
 
+        function getWeatherTranslation(code) {
+            switch (code) {
+                case 0: return '快晴';
+                case 1: return '晴れ';
+                case 2: return '一部曇り';
+                case 3: return '曇り';
+                case 45: case 48: return '霧';
+                case 51: case 53: case 55: return '霧雨';
+                case 61: case 63: case 65: return '雨';
+                case 71: case 73: case 75: return '雪';
+                case 95: case 96: case 99: return '雷雨';
+                default: return '不明';
+            }
+        }
+
         async function updateWeather() {
             const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.6&longitude=140.1167&current=temperature_2m,weather_code,relative_humidity_2m';
 
@@ -32,7 +47,8 @@
                 // 取得したデータを反映
                 tempElement.textContent = data.current.temperature_2m;
                 humElement.textContent = data.current.relative_humidity_2m;
-                weatherInfoElement.textContent = data.current.weather_code;
+                const code = data.current.weather_code;
+                weatherInfoElement.textContent = getWeatherTranslation(code);
             } catch (error) {
                 console.error('天気情報の取得に失敗しました', error);
             }
