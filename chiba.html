@@ -9,7 +9,12 @@
 </head>
 
 <body>
-    <h1 class="app-title">現在の千葉県の天気</h1>
+    <h1 class="app-title">現在の天気</h1>
+    <select id="location-select">
+        <option value="chiba">千葉県</option>
+        <option value="tokyo">東京都</option>
+        <option value="kanagawa">神奈川県</option>
+    </select>
     <div id="weather-info" class="weather-large">---</div>
     <div class="weather-details">
         <p class="detail-row">
@@ -18,9 +23,15 @@
             湿度： <span id="humidity" class="detail-value">--</span>%</p>
     </div>
     <script>
+        const locations = {
+            chiba: {name: '千葉県', lat: 35.609, lon: 140.117},
+            tokyo: {name: '東京都', lat: 35.689, lon: 139.692},
+            kanagawa: {name: '神奈川県', lat: 35.444, lon: 139.638}
+        }
         const tempElement = document.getElementById('temperature'); // 気温用の箱
         const humElement = document.getElementById('humidity'); // 湿度用の箱
         const weatherInfoElement = document.getElementById('weather-info'); // 天気情報用の箱
+        const selectElement = document.getElementById('location-select');
 
         function getWeatherTranslation(code) {
             switch (code) {
@@ -37,8 +48,8 @@
             }
         }
 
-        async function updateWeather() {
-            const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.6&longitude=140.1167&current=temperature_2m,weather_code,relative_humidity_2m';
+        async function updateWeather(lat, lon) {
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,relative_humidity_2m`;
 
             try {
                 const response = await fetch(url); // URLへデータを取りに行く
@@ -53,7 +64,12 @@
                 console.error('天気情報の取得に失敗しました', error);
             }
         }
-        updateWeather();
+        selectElement.addEventListener('change', function() {
+            const selectedKey = selectElement.value;
+            const target = locations[selectedKey];
+            updateWeather(target.lat, target.lon);
+        });
+        updateWeather(locations.chiba.lat, locations.chiba.lon);
     </script>
 </body>
 
