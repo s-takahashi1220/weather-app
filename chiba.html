@@ -9,10 +9,14 @@
 </head>
 
 <body>
-    <h1>現在の千葉県の天気</h1>
-    <div id="weather-info">---</div>
-    <p>気温： <span id="temperature">--</span>℃</p>
-    <p>湿度： <span id="humidity">--</span>%</p>
+    <h1 class="app-title">現在の千葉県の天気</h1>
+    <div id="weather-info" class="weather-large">---</div>
+    <div class="weather-details">
+        <p class="detail-row">
+            気温： <span id="temperature" class="detail-value">--</span>℃</p>
+        <p class="detail-row">
+            湿度： <span id="humidity" class="detail-value">--</span>%</p>
+    </div>
     <script>
         const tempElement = document.getElementById('temperature'); // 気温用の箱
         const humElement = document.getElementById('humidity'); // 湿度用の箱
