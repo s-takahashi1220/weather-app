@@ -11,9 +11,53 @@
 <body>
     <h1 class="app-title">現在の天気</h1>
     <select id="location-select">
-        <option value="chiba">千葉県</option>
+        <option value="hokkaido">北海道</option>
+        <option value="aomori">青森県</option>
+        <option value="iwate">岩手県</option>
+        <option value="miyagi">宮城県</option>
+        <option value="akita">秋田県</option>
+        <option value="yamagata">山形県</option>
+        <option value="fukushima">福島県</option>
+        <option value="ibaraki">茨城県</option>
+        <option value="tochigi">栃木県</option>
+        <option value="gunma">群馬県</option>
+        <option value="saitama">埼玉県</option>
+        <option value="chiba" selected>千葉県</option>
         <option value="tokyo">東京都</option>
         <option value="kanagawa">神奈川県</option>
+        <option value="niigata">新潟県</option>
+        <option value="toyama">富山県</option>
+        <option value="ishikawa">石川県</option>
+        <option value="fukui">福井県</option>
+        <option value="yamanashi">山梨県</option>
+        <option value="nagano">長野県</option>
+        <option value="gifu">岐阜県</option>
+        <option value="shizuoka">静岡県</option>
+        <option value="aichi">愛知県</option>
+        <option value="mie">三重県</option>
+        <option value="shiga">滋賀県</option>
+        <option value="kyoto">京都府</option>
+        <option value="osaka">大阪府</option>
+        <option value="hyogo">兵庫県</option>
+        <option value="nara">奈良県</option>
+        <option value="wakayama">和歌山県</option>
+        <option value="tottori">鳥取県</option>
+        <option value="shimane">島根県</option>
+        <option value="okayama">岡山県</option>
+        <option value="hiroshima">広島県</option>
+        <option value="yamaguchi">山口県</option>
+        <option value="tokushima">徳島県</option>
+        <option value="kagawa">香川県</option>
+        <option value="ehime">愛媛県</option>
+        <option value="kochi">高知県</option>
+        <option value="fukuoka">福岡県</option>
+        <option value="saga">佐賀県</option>
+        <option value="nagasaki">長崎県</option>
+        <option value="kumamoto">熊本県</option>
+        <option value="oita">大分県</option>
+        <option value="miyazaki">宮崎県</option>
+        <option value="kagoshima">鹿児島県</option>
+        <option value="okinawa">沖縄県</option>
     </select>
     <div id="weather-info" class="weather-large">---</div>
     <div class="weather-details">
@@ -23,11 +67,56 @@
             湿度： <span id="humidity" class="detail-value">--</span>%</p>
     </div>
     <script>
+        // 47都道府県の座標リスト
         const locations = {
-            chiba: {name: '千葉県', lat: 35.609, lon: 140.117},
-            tokyo: {name: '東京都', lat: 35.689, lon: 139.692},
-            kanagawa: {name: '神奈川県', lat: 35.444, lon: 139.638}
-        }
+            hokkaido: { name: '北海道', lat: 43.064, lon: 141.347 },
+            aomori: { name: '青森県', lat: 40.824, lon: 140.74 },
+            iwate: { name: '岩手県', lat: 39.704, lon: 141.153 },
+            miyagi: { name: '宮城県', lat: 38.268, lon: 140.872 },
+            akita: { name: '秋田県', lat: 39.718, lon: 140.102 },
+            yamagata: { name: '山形県', lat: 38.24, lon: 140.363 },
+            fukushima: { name: '福島県', lat: 37.75, lon: 140.467 },
+            ibaraki: { name: '茨城県', lat: 36.341, lon: 140.447 },
+            tochigi: { name: '栃木県', lat: 36.565, lon: 139.883 },
+            gunma: { name: '群馬県', lat: 36.391, lon: 139.06 },
+            saitama: { name: '埼玉県', lat: 35.857, lon: 139.649 },
+            chiba: { name: '千葉県', lat: 35.605, lon: 140.123 },
+            tokyo: { name: '東京都', lat: 35.689, lon: 139.692 },
+            kanagawa: { name: '神奈川県', lat: 35.448, lon: 139.642 },
+            niigata: { name: '新潟県', lat: 37.902, lon: 139.023 },
+            toyama: { name: '富山県', lat: 36.695, lon: 137.211 },
+            ishikawa: { name: '石川県', lat: 36.594, lon: 136.626 },
+            fukui: { name: '福井県', lat: 36.065, lon: 136.222 },
+            yamanashi: { name: '山梨県', lat: 35.664, lon: 138.568 },
+            nagano: { name: '長野県', lat: 36.651, lon: 138.181 },
+            gifu: { name: '岐阜県', lat: 35.391, lon: 136.722 },
+            shizuoka: { name: '静岡県', lat: 34.976, lon: 138.383 },
+            aichi: { name: '愛知県', lat: 35.18, lon: 136.907 },
+            mie: { name: '三重県', lat: 34.73, lon: 136.509 },
+            shiga: { name: '滋賀県', lat: 35.004, lon: 135.869 },
+            kyoto: { name: '京都府', lat: 35.021, lon: 135.756 },
+            osaka: { name: '大阪府', lat: 34.686, lon: 135.52 },
+            hyogo: { name: '兵庫県', lat: 34.691, lon: 135.183 },
+            nara: { name: '奈良県', lat: 34.685, lon: 135.833 },
+            wakayama: { name: '和歌山県', lat: 34.226, lon: 135.168 },
+            tottori: { name: '鳥取県', lat: 35.503, lon: 134.238 },
+            shimane: { name: '島根県', lat: 35.472, lon: 133.051 },
+            okayama: { name: '岡山県', lat: 34.662, lon: 133.935 },
+            hiroshima: { name: '広島県', lat: 34.396, lon: 132.459 },
+            yamaguchi: { name: '山口県', lat: 34.186, lon: 131.471 },
+            tokushima: { name: '徳島県', lat: 34.066, lon: 134.559 },
+            kagawa: { name: '香川県', lat: 34.34, lon: 134.043 },
+            ehime: { name: '愛媛県', lat: 33.842, lon: 132.766 },
+            kochi: { name: '高知県', lat: 33.559, lon: 133.531 },
+            fukuoka: { name: '福岡県', lat: 33.606, lon: 130.418 },
+            saga: { name: '佐賀県', lat: 33.249, lon: 130.299 },
+            nagasaki: { name: '長崎県', lat: 32.745, lon: 129.873 },
+            kumamoto: { name: '熊本県', lat: 32.79, lon: 130.742 },
+            oita: { name: '大分県', lat: 33.238, lon: 131.613 },
+            miyazaki: { name: '宮崎県', lat: 31.911, lon: 131.423 },
+            kagoshima: { name: '鹿児島県', lat: 31.56, lon: 130.558 },
+            okinawa: { name: '沖縄県', lat: 26.212, lon: 127.681 }
+        };
         const tempElement = document.getElementById('temperature'); // 気温用の箱
         const humElement = document.getElementById('humidity'); // 湿度用の箱
         const weatherInfoElement = document.getElementById('weather-info'); // 天気情報用の箱
@@ -64,7 +153,7 @@
                 console.error('天気情報の取得に失敗しました', error);
             }
         }
-        selectElement.addEventListener('change', function() {
+        selectElement.addEventListener('change', function () {
             const selectedKey = selectElement.value;
             const target = locations[selectedKey];
             updateWeather(target.lat, target.lon);
