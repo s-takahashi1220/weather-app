@@ -1,31 +1,122 @@
-/* ページ全体の設定 */
+@charset "UTF-8";
+
+/* =========================================
+   リセットと基本設定
+   ========================================= */
+/* すべての要素のサイズ計算を直感的にする設定 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    margin: 0;
-    font-family: sans-serif;
-    text-align: center;
+    /* システム標準のきれいなフォントを使用 */
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    /* 背景色：ごく薄いグレーで落ち着きを出す */
+    background-color: #f7f9fc;
+    /* 文字色：真っ黒ではない濃いグレー */
     color: #333;
-    background-color: #e0f7fa;
+    
+    /* 画面中央に配置するための設定 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* 画面の高さいっぱいに広げる */
+    padding: 30px; /* スマホでの端の余白 */
+    line-height: 1.6;
 }
 
-/* タイトル */
+/* コンテンツの幅が広がりすぎないように制限 */
+body > * {
+    width: 100%;
+    max-width: 420px; /* スマホで見やすいカードサイズ */
+}
+
+/* =========================================
+   各パーツのデザイン
+   ========================================= */
+
+/* 1. アプリタイトル */
 .app-title {
-    margin: 0;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #5a6a85; /* 少し青みがかったグレー */
+    letter-spacing: 0.05em; /* 文字間を少し広げて洗練させる */
 }
 
-/* 天気（今は数字） */
+/* 2. セレクトボックス（プルダウン） */
+#location-select {
+    /* ブラウザ標準の野暮ったいスタイルをリセット */
+    appearance: none;
+    -webkit-appearance: none; /* Safari/Chrome用 */
+
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 16px;
+    border: 2px solid #e2e8f0; /* 薄いグレーの枠線 */
+    border-radius: 12px; /* 角丸 */
+    background-color: #fff;
+    color: #2d3748;
+    cursor: pointer;
+    outline: none; /* クリック時の青い枠線を消す */
+    transition: all 0.3s ease; /* 変化をふわっとさせる */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03); /* ごく薄い影 */
+
+    /* カスタム矢印アイコン（SVG）を背景に設定 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 18px;
+}
+
+/* ホバー時と選択時のスタイル */
+#location-select:hover,
+#location-select:focus {
+    border-color: #3182ce; /* アクセントカラーの青 */
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15); /* 青いぼかし光 */
+}
+
+/* 3. メインの天気表示（大） */
 .weather-large {
-    font-size: 3rem;
-    margin: 20px 0;
+    font-size: 3.5rem; /* かなり大きく */
+    font-weight: 800; /* 極太 */
+    text-align: center;
+    margin: 50px 0; /* 上下にたっぷり余白 */
+    color: #2d3748;
+    line-height: 1.2;
 }
 
-/* 気温と湿度 */
+/* 4. 詳細情報エリア（カード型） */
+.weather-details {
+    background-color: #fff; /* 白いカード */
+    padding: 30px;
+    border-radius: 20px; /* 大きめの角丸 */
+    /* ふんわり浮き上がるようなリッチな影 */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* 詳細情報の各行 */
 .detail-row {
-    font-size: 1.2rem;
-    margin: 5px 0;
+    display: flex; /* 横並びにする */
+    justify-content: space-between; /* 両端に配置 */
+    align-items: center; /* 上下中央揃え */
+    font-size: 1.1rem; /* 少し大きめの文字 */
+    margin-bottom: 20px; /* 行間を広げる */
+    color: #718096; /* グレー */
+}
+
+
+.detail-row:last-child {
+    margin-bottom: 0;
+}
+
+
+.detail-value {
+    font-weight: 700; /* 太字で強調 */
+    color: #2d3748;     /* 濃い文字色 */
+    font-size: 1.5rem;  /* さらに大きく */
 }
